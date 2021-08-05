@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { Outlet } from "react-router";
+import Navbar from "../../components/navbar";
+import Sidebar from "../../components/sidebar";
+import Users from "../../components/users";
 
-interface Props {
-  children: JSX.Element;
-  sidebar: JSX.Element;
-  navbar: JSX.Element;
-}
+function SidebarLayout() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const openSidebar = () => setSidebarOpen(true);
 
-function SidebarLayout({ children, sidebar, navbar }: Props) {
   return (
-    <div className="h-screen bg-white overflow-hidden flex">
-      {sidebar}
-      <div className="flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0">
-        {navbar}
-
-        <div className="flex-1 flex items-stretch overflow-hidden">
-          {children}
-        </div>
+    <div className="h-screen overflow-hidden">
+      <Navbar openSidebar={openSidebar} />
+      <div className="w-full flex flex-row h-full md:px-8 xl:px-0">
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <Outlet />
+        <Users />
       </div>
     </div>
   );

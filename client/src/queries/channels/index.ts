@@ -5,6 +5,9 @@ export const FETCH_CHANNELS = gql`
     channels {
       _id
       name
+      messages {
+        _id
+      }
     }
   }
 `;
@@ -17,10 +20,15 @@ export const FETCH_CHANNEL = gql`
       messages {
         _id
         text
+        date
         user {
           _id
           name
         }
+      }
+      users {
+        _id
+        name
       }
     }
   }

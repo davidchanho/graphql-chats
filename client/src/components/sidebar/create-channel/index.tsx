@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { ADD_CHANNEL } from "../../queries";
+import { ADD_CHANNEL } from "../../../queries";
 
 function CreateChannel() {
   const [name, setName] = useState("");
@@ -21,7 +21,7 @@ function CreateChannel() {
     setName("");
     client.resetStore();
   };
- 
+
   return (
     <form onSubmit={handleSubmit}>
       <input

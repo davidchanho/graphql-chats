@@ -3,6 +3,8 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import useClient from "./client";
+import { AuthProvider } from "./config/firebase";
+import SidebarLayout from "./layouts/sidebar-layout";
 import Chatroom from "./pages/chatroom";
 import Register from "./pages/register";
 
@@ -15,12 +17,19 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Chatroom />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/channels" element={<SidebarLayout />}>
+              <Route path="/:_id" element={<Chatroom />} />
+            </Route>
+            <Route path="me">
+              <Route path="/" element={<Register />} />
+            </Route>
+            <Route path="/" element={<Register />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </ApolloProvider>
   );
 }

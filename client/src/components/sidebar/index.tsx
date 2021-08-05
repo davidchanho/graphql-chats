@@ -1,12 +1,13 @@
-import { useQuery, useReactiveVar } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Dialog, Transition } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/outline";
+import { PlusIcon, XIcon } from "@heroicons/react/outline";
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { IChannel } from "../../../../shared/types";
-import { currentChannelVar } from "../../client";
+import Badge from "../../common/badge";
 import { classNames } from "../../helpers";
 import { FETCH_CHANNELS } from "../../queries";
-import CreateChannel from "./CreateChannel";
+import CreateChannel from "./create-channel";
 
 interface Props {
   sidebarOpen: boolean;
@@ -15,7 +16,6 @@ interface Props {
 
 function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
   const { loading, error, data } = useQuery(FETCH_CHANNELS);
-  const currentChannel = useReactiveVar(currentChannelVar);
 
   if (loading) return null;
   if (error) return null;
@@ -79,18 +79,23 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
               </div>
               <div className="mt-5 flex-1 h-0 overflow-y-auto">
                 <nav className="px-2 space-y-1">
-                  {data.channels.map((channel: IChannel) => (
-                    <a
-                      key={channel._id}
-                      className={classNames(
-                        currentChannel === channel._id
-                          ? "bg-gray-100 text-gray-900"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                        "group rounded-md py-2 px-2 flex items-center text-base font-medium"
-                      )}
-                    >
-                      {channel.name}
-                    </a>
+                  {data.channels.map((channel: IChannel, index: number) => (
+                    <Link key={channel._id} to={`/channels/${channel._id}`}>
+                      <li
+                        className={classNames(
+                          index === 0
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                          "group rounded-md p-2 flex items-center justify-between text-sm font-medium cursor-pointer capitalize"
+                        )}
+                      >
+                        {channel.name}
+                        <Badge
+                          label={`${channel?.messages?.length}`}
+                          color="gray"
+                        />
+                      </li>
+                    </Link>
                   ))}
                 </nav>
               </div>
@@ -104,32 +109,36 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
 
       <div className="hidden md:flex md:flex-shrink-0">
         <div className="w-64 flex flex-col">
-          <div className="border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto">
-            <div className="flex-shrink-0 px-4 flex items-center">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                alt="Workflow"
-              />
-            </div>
-            <div className="flex-grow mt-5 flex flex-col">
-              <nav className="flex-1 bg-white px-2 space-y-1">
-                {data.channels.map((channel: IChannel) => (
-                  <li
-                    key={channel.name}
-                    onClick={() => currentChannelVar(channel._id)}
-                    className={classNames(
-                      currentChannel === channel._id
-                        ? "bg-gray-100 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                      "group rounded-md py-2 px-2 flex items-center text-sm font-medium cursor-pointer capitalize"
-                    )}
-                  >
-                    {channel.name}
-                  </li>
+          <div className="border-r border-gray-200 pt-3 pb-4 flex flex-col flex-grow overflow-y-auto">
+            <div className="flex-grow flex flex-col">
+              <div className="flex flex-row items-center justify-between">
+                <h2 className="px-3 mb-2 text-md font-bold capitalize">
+                  Channels
+                </h2>
+                <PlusIcon className="w-6 h-auto m-1" />
+              </div>
+
+              <nav className="px-2 space-y-1 h-2/6 overflow-y-scroll">
+                {data.channels.map((channel: IChannel, index: number) => (
+                  <Link key={channel._id} to={`/channels/${channel._id}`}>
+                    <li
+                      className={classNames(
+                        index === 0
+                          ? "bg-gray-100 text-gray-900"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                        "group rounded-md p-2 flex items-center justify-between text-sm font-medium cursor-pointer capitalize"
+                      )}
+                    >
+                      {channel.name}
+                      <Badge
+                        label={`${channel?.messages?.length}`}
+                        color="gray"
+                      />
+                    </li>
+                  </Link>
                 ))}
-                <CreateChannel />
               </nav>
+              <CreateChannel />
             </div>
           </div>
         </div>

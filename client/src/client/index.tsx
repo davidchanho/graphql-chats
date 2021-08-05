@@ -1,15 +1,17 @@
 import { ApolloClient, HttpLink, NormalizedCacheObject } from "@apollo/client";
-import { InMemoryCache, makeVar, split } from "@apollo/client/core";
+import { InMemoryCache, makeVar, split, from } from "@apollo/client/core";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import {
   getMainDefinition,
   offsetLimitPagination,
 } from "@apollo/client/utilities";
 import { CachePersistor, LocalForageWrapper } from "apollo3-cache-persist";
+import dayjs from "dayjs";
 import localforage from "localforage";
 import _ from "lodash";
 import { useEffect, useState } from "react";
-
+import { RestLink } from "apollo-link-rest";
+const restLink = new RestLink({ uri: "https://swapi.dev/api/" });
 export const currentChannelVar = makeVar("6109d3b97a879c92b7014ea2");
 export const userVar = makeVar("6109d3a47a879c92b7014ea0");
 
@@ -29,16 +31,20 @@ const cache = new InMemoryCache({
         },
       },
     },
+    Message: {
+      fields: {
+        date: {
+          read(date: string) {
+            return dayjs(date).format("h:MM A");
+          },
+        },
+      },
+    },
     User: {
       fields: {
         name: {
           read(name, options) {
             return _.capitalize(name);
-          },
-        },
-        currentUser: {
-          read() {
-            return userVar;
           },
         },
       },
