@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   extend type Query {
-    messages(offset: Int, limit: Int): [Message]
+    messages(offset: Int, limit: Int, channel: ID): [Message]
     message(_id: ID!): Message
   }
 

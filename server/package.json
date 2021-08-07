@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/express-jwt": "^6.0.2",
     "@types/faker": "^5.5.7",
     "@types/ioredis": "^4.26.6",
@@ -22,6 +23,7 @@
     "@types/node": "^16.4.3",
     "apollo-server": "^3.0.2",
     "apollo-server-express": "^3.0.2",
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "faker": "^5.5.3",

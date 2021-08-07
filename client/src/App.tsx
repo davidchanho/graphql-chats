@@ -23,9 +23,6 @@ function App() {
             <Route path="/channels" element={<SidebarLayout />}>
               <Route path="/:_id" element={<Chatroom />} />
             </Route>
-            <Route path="me">
-              <Route path="/" element={<Register />} />
-            </Route>
             <Route path="/" element={<Register />} />
           </Routes>
         </BrowserRouter>

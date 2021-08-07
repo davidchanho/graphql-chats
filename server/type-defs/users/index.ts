@@ -21,12 +21,11 @@ export const typeDefs = gql`
   input UserInput {
     email: String
     password: String
-    name: String
   }
 
   type Mutation {
-    login(email: String!, password: String!): String
-    addUser(item: UserInput): User
+    login(email: String, password: String): User
+    addUser(email: String, password: String): User
     removeUser(_id: ID!): User
     updateUser(_id: ID!, item: UserInput): User
   }

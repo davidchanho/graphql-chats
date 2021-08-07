@@ -1,25 +1,27 @@
 import React, { useState } from "react";
+import Input from "../../../common/input";
 import { auth } from "../../../config/firebase";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signup = () => auth.createUserWithEmailAndPassword(email, password);
+  const SignupWithEmailAndPassword = () =>
+    auth.createUserWithEmailAndPassword(email, password);
 
   return (
     <div>
-      <input
+      <Input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <input
+      <Input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={signup}>Register</button>
+      <button onClick={SignupWithEmailAndPassword}>Register</button>
     </div>
   );
 };

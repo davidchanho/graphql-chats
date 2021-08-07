@@ -1,25 +1,25 @@
-import API from "../../api";
+import controllers from "../../controllers";
+import db from "../../models";
 
-const model = "Channel";
+const model = db.Channel;
 
 const Query = {
-  channels: API.fetchMany(model),
-  channel: API.fetchOne(model),
+  channels: controllers.fetchMany(model),
+  channel: controllers.fetchOne(model),
 };
-
 const Channel = {
-  users: (parent: any, args: any, { User }: any) => {
-    return User.find({ channel: parent._id });
+  users: async (parent: any, args: any, context: any) => {
+    return db.Message.find({ channel: parent._id });
   },
-  messages: (parent: any, args: any, { Message }: any) => {
-    return Message.find({ channel: parent._id });
+  messages: (parent: any, args: any, context: any) => {
+    return db.Message.find({ channel: parent._id });
   },
 };
 
 const Mutation = {
-  addChannel: API.addOne(model),
-  removeChannel: API.removeOne(model),
-  updateChannel: API.updateOne(model),
+  addChannel: controllers.addOne(model),
+  removeChannel: controllers.removeOne(model),
+  updateChannel: controllers.updateOne(model),
 };
 
 export const resolvers = {

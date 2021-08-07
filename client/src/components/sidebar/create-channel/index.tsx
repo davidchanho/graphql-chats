@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
+import Input from "../../../common/input";
 import { ADD_CHANNEL } from "../../../queries";
 
 function CreateChannel() {
@@ -24,7 +25,7 @@ function CreateChannel() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <Input
         type="text"
         value={name}
         onChange={handleChange}

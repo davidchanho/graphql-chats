@@ -3,7 +3,8 @@ import { auth } from "../../../config/firebase";
 
 export const SignOut = () => {
   const navigate = useNavigate();
-  const signout = () =>
+
+  const signout = () => 
     auth.signOut().then(() => {
       navigate("/");
     });

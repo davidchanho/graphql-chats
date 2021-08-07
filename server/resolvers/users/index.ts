@@ -1,40 +1,42 @@
-import jwt from "jsonwebtoken";
-import API from "../../api";
+import bcrypt from "bcrypt";
+import controllers from "../../controllers";
+import db from "../../models";
 
-const model = "User";
+const model = db.User;
 
 const Query = {
-  users: API.fetchMany(model),
-  user: API.fetchOne(model),
+  users: controllers.fetchMany(model),
+  user: controllers.fetchOne(model),
 };
 
 const User = {
-  messages: (parent: any, args: any, { Message }: any) => {
-    return Message.find({ _id: { $in: parent.messages } });
+  messages: (parent: any, args: any, context: any) => {
+    return db.Message.find({ _id: { $in: parent.messages } });
   },
-  bookmarks: (parent: any, args: any, { Message }: any) => {
-    return Message.find({ _id: { $in: parent.bookmarks } });
+  bookmarks: (parent: any, args: any, context: any) => {
+    return db.Message.find({ _id: { $in: parent.bookmarks } });
   },
-  channels: (parent: any, args: any, { Channel }: any) => {
-    return Channel.find({ _id: { $in: parent.channels } });
+  channels: (parent: any, args: any, context: any) => {
+    return db.Channel.find({ _id: { $in: parent.channels } });
   },
 };
 
+interface IUser {
+  email: string;
+  password: string;
+}
+
 const Mutation = {
-  login: async (parent: any, args: any, { User }: any) => {
-    const user = await User.find({ email: args.email });
-
-    if (user) {
-      const token = jwt.sign({ _id: user._id }, "secret", {
-        algorithm: "HS256",
-      });
-
-      return token;
-    }
+  login: async (parent: any, args: any, context: any) => {},
+  addUser: async (parent: any, args: IUser) => {
+    const hashed = await bcrypt.hash(args.password, 10);
+    return await db.User.create({
+      email: args.email,
+      password: hashed,
+    });
   },
-  addUser: API.addOne(model),
-  removeUser: API.removeOne(model),
-  updateUser: API.updateOne(model),
+  removeUser: controllers.removeOne(model),
+  updateUser: controllers.updateOne(model),
 };
 
 export const resolvers = {

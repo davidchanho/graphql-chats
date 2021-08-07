@@ -1,6 +1,5 @@
 import { MenuAlt2Icon } from "@heroicons/react/outline";
 import React from "react";
-import Brand from "./brand";
 import NavSearch from "./nav-search";
 import NotificationMenu from "./notification-menu";
 import ProfileDropdown from "./profile-dropdown";
@@ -20,7 +19,6 @@ function Navbar({ openSidebar }: Props) {
         <MenuAlt2Icon className="h-8 w-auto" aria-hidden="true" />
       </button>
       <div className="flex-1 flex justify-between px-4 md:px-0">
-        <Brand />
         <NavSearch />
         <div className="ml-4 flex items-center md:ml-6">
           <NotificationMenu />
