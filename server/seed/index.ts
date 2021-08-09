@@ -1,45 +1,29 @@
-import faker from "faker";
-import mongoose from 'mongoose';
+import _ from "lodash";
 import client from "../client";
-import db from "../models";
-import { IMessage } from "./../../shared/types/messages/index";
-import { IUser } from "./../../shared/types/users/index";
-const messages: IMessage[] = [];
-const users: IUser[] = [];
+import models from "../models";
+import { closeDB, createChannel, createMessage, createUser } from "./helpers";
 
-(async function seedChannels() {
+_.times(5, async function seed() {
   client();
-  const name = faker.lorem.words();
-  const newChannel = {
-    name,
-  };
-  const channel = await new db.Channel(newChannel);
-  return channel.save();
-})();
 
-(async function seedUsers() {
-  client();
-  const _id = new mongoose.Types.ObjectId()
-  const name = faker.lorem.words();
-  const email = faker.lorem.word();
-  const password = faker.lorem.word();
+  const newChannel = createChannel();
+  const channel = await new models.Channel(newChannel);
 
-  const newUser = {
-    _id,
-    name,
-    email,
-    password,
-  };
-  const user = await new db.User(newUser);
-  return user.save();
-})();
+  const newUser = createUser();
+  const user = await new models.User(newUser);
 
-(async function seedMessages() {
-  client();
-  const text = faker.lorem.words(); 
-  const newMessage = {
-    text,
-  };
-  const message = await new db.Message(newMessage);
-  return message.save();
-})();
+  channel.users.push(user);
+  user.channels.push(channel);
+
+  const newMessage = createMessage();
+  const message = await new models.Message(newMessage);
+
+  channel.messages.push(message);
+
+  user.messages.push(message);
+
+  message.channel = channel;
+  message.user = user;
+
+  closeDB([channel.save(), user.save(), message.save()]);
+});

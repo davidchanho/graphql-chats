@@ -1,35 +1,38 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
-import { users } from "../../data";
+import { IUser } from "../../../../shared/types";
 
 interface Props {
-  name?: string;
+  user: IUser;
   size?: string;
-  src?: string | null | undefined;
   round?: boolean;
 }
 
-function Avatar({
-  name,
-  size = "8",
-  src = users[0].avatar,
-  round = false,
-}: Props) {
-  if (!src) {
-    return (
-      <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
-        <span className="text-sm font-medium leading-none text-white">
-          {name}
-        </span>
-      </span>
-    );
+const FETCH_USER_AVATAR = gql`
+  query FetchUser($_id: ID!) {
+    user(_id: $_id) {
+      _id
+      avatar
+    }
   }
+`;
+
+function Avatar({ user, size = "8", round = false }: Props) {
+  const { loading, error, data } = useQuery(FETCH_USER_AVATAR, {
+    variables: {
+      _id: user._id,
+    },
+  });
+
+  if (loading) return null;
+  if (error) return null;
 
   return (
     <img
       className={`h-${size} w-auto ${
         round ? "rounded-full" : "rounded"
       } ring-2 ring-white`}
-      src={src}
+      src={data.user.avatar}
       alt=""
     />
   );

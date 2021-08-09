@@ -9,6 +9,15 @@ export const FETCH_USERS = gql`
   }
 `;
 
+export const FETCH_USER_PORTFOLIO = gql`
+  query FetchUserPortfolio($_id: ID!) {
+    user(_id: $_id) {
+      _id
+      name
+    }
+  }
+`;
+
 export const LOGIN_USER = gql`
   mutation LoginUser($email: String, $password: String) {
     loginUser(email: $email, password: $password) {

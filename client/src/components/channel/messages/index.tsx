@@ -4,15 +4,12 @@ import { useParams } from "react-router-dom";
 import { IMessage } from "../../../../../shared/types";
 import Message from "../message";
 
-const FETCH_MESSAGES = gql`
-  query Query($channel: ID!) {
-    messages(channel: $channel) {
+const FETCH_CHANNEL_MESSAGES = gql`
+  query FetchChannelMessages($_id: ID!) {
+    channel(_id: $_id) {
       _id
-      text
-      date
-      user {
+      messages {
         _id
-        name
       }
     }
   }
@@ -21,9 +18,9 @@ const FETCH_MESSAGES = gql`
 function Messages() {
   const params = useParams();
 
-  const { loading, error, data } = useQuery(FETCH_MESSAGES, {
+  const { loading, error, data } = useQuery(FETCH_CHANNEL_MESSAGES, {
     variables: {
-      channel: params._id,
+      _id: params._id,
     },
   });
 
@@ -32,7 +29,7 @@ function Messages() {
 
   return (
     <div className="overflow-y-scroll h-4/6">
-      {data.messages.map((message: IMessage) => {
+      {data.channel.messages.map((message: IMessage) => {
         return <Message key={message._id} message={message} />;
       })}
     </div>

@@ -9,14 +9,14 @@ export const typeDefs = gql`
 
   type User {
     _id: ID!
-    username: String!
+    name: String!
     email: String!
     password: String!
     avatar: String
     date: String!
-    channels: [Channel!]!
-    messages: [Message!]!
-    bookmarks: [Message!]!
+    channels: [Channel!]
+    messages: [Message!]
+    bookmarks: [Message!]
   }
 
   type UserInput {

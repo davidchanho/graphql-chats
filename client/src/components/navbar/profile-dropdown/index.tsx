@@ -21,7 +21,7 @@ const ProfileDropdown = () => {
           <div>
             <Menu.Button className="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <span className="sr-only">Open user menu</span>
-              <Avatar size="8" round src={user?.photoURL} />
+              {/* <Avatar size="8" round src={user?.photoURL} /> */}
             </Menu.Button>
           </div>
           <Transition

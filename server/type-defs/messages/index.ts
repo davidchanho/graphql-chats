@@ -13,7 +13,7 @@ export const typeDefs = gql`
     date: String!
     channel: Channel!
     user: User!
-    bookmarkedBy: [User!]
+    bookmarkedBy: [User]
   }
 
   type MessageFeed {

@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import React, { Fragment } from "react";
@@ -6,7 +6,18 @@ import { Link } from "react-router-dom";
 import { IChannel } from "../../../../shared/types";
 import Badge from "../../common/badge";
 import { classNames } from "../../helpers";
-import { FETCH_CHANNELS } from "../../queries";
+
+const FETCH_CHANNELS = gql`
+  query FetchChannels {
+    channels {
+      _id
+      name
+      messages {
+        _id
+      }
+    }
+  }
+`;
 
 interface Props {
   sidebarOpen: boolean;
@@ -48,12 +59,14 @@ function List({ channels }: ListProps) {
               </Disclosure.Button>
               <Disclosure.Panel className="space-y-1 overflow-y-scroll">
                 {item.children.map((item) => (
-                  <li className="flex flex-row space-x-2 py-2 px-3 items-center justify-between hover:bg-gray-100 cursor-pointer">
-                    <p className="text-sm font-medium text-gray-900 truncate">
-                      #{item.name}
-                    </p>
-                    <Badge label={`${item.messages?.length}`} color="gray" />
-                  </li>
+                  <Link key={item._id} to={`/channels/${item._id}`}>
+                    <li className="flex flex-row space-x-2 py-2 px-3 items-center justify-between hover:bg-gray-100 cursor-pointer">
+                      <p className="text-sm font-medium text-gray-900 truncate">
+                        #{item.name}
+                      </p>
+                      <Badge label={`${item.messages?.length}`} color="gray" />
+                    </li>
+                  </Link>
                 ))}
               </Disclosure.Panel>
             </>

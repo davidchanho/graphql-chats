@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     avatar: { type: String },
+    messages: [{ type: Schema.Types.ObjectId, ref: "message" }],
     bookmarks: [{ type: Schema.Types.ObjectId, ref: "message" }],
     channels: [{ type: Schema.Types.ObjectId, ref: "channel" }],
     date: { type: String, default: new Date().toString() },

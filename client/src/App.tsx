@@ -5,8 +5,9 @@ import "./App.css";
 import useClient from "./client";
 import { AuthProvider } from "./client/firebase";
 import SidebarLayout from "./layouts/sidebar-layout";
-import Chatroom from "./pages/chatroom";
+import Channel from "./pages/channel";
 import Register from "./pages/register";
+import User from "./pages/users";
 
 function App() {
   const { client } = useClient();
@@ -20,8 +21,11 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/users" element={<SidebarLayout />}>
+              <Route path="/:_id" element={<User />} />
+            </Route>
             <Route path="/channels" element={<SidebarLayout />}>
-              <Route path="/:_id" element={<Chatroom />} />
+              <Route path="/:_id" element={<Channel />} />
             </Route>
             <Route path="/" element={<Register />} />
           </Routes>

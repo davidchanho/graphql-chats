@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Disclosure } from "@headlessui/react";
 import React from "react";
-import Avatar from "../../common/avatar";
 import { users } from "../../data";
 import { classNames } from "../../helpers";
 import { FETCH_USERS } from "../../queries";
@@ -89,7 +88,7 @@ function List() {
                     className="flex flex-row space-x-2 py-2 pl-7 items-center "
                   >
                     <div className="flex-shrink-0">
-                      <Avatar round src={item.avatar} size="8" />
+                      {/* <Avatar round src={item.avatar} size="8" /> */}
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 truncate">

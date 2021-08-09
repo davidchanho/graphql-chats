@@ -6,5 +6,6 @@ export interface IMessage {
   text: string;
   user: IUser;
   channel: IChannel;
-  date: string;
+  date?: string;
+  bookmarkedBy?: IUser[];
 }

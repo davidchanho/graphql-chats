@@ -3,7 +3,7 @@ import { IUser } from "./../users/index";
 export interface IChannel {
   _id?: string;
   name: string;
-  date: string;
+  date?: string;
   messages?: IMessage[];
   users?: IUser[];
 }

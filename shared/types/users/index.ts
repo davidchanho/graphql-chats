@@ -7,6 +7,7 @@ export interface IUser {
   email: string;
   password: string;
   avatar: string;
+  messages: IMessage[];
   bookmarks: IMessage[];
   channels: IChannel[];
   date: string;

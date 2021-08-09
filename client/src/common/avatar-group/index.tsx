@@ -1,19 +1,15 @@
 import React from "react";
-import { users } from "../../data";
+import { IUser } from "../../../../shared/types";
+import { UsersProps } from "../../types";
 import Avatar from "../avatar";
 
-export default function AvatarGroup() {
+export default function AvatarGroup({ users }: UsersProps) {
   return (
     <div className="flex gap-2 items-center">
       <div className="flex -space-x-1 overflow-hidden">
-        {users.slice(0, 3).map((user: any) => {
+        {users.slice(0, 3).map((user: IUser) => {
           return (
-            <Avatar
-              size="8"
-              key={`${user.name}-avatar`}
-              src={user.avatar}
-              round
-            />
+            <Avatar size="8" key={`${user._id}-avatar`} user={user} round />
           );
         })}
       </div>
