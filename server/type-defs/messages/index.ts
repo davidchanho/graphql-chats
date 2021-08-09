@@ -10,10 +10,10 @@ export const typeDefs = gql`
   type Message {
     _id: ID!
     text: String!
-    date: String!
     channel: Channel!
     user: User!
     bookmarkedBy: [User]
+    createdAt: String!
   }
 
   type MessageFeed {

@@ -10,7 +10,7 @@ const FETCH_MESSAGE = gql`
     message(_id: $_id) {
       _id
       text
-      date
+      createdAt
       user {
         _id
         name
@@ -46,7 +46,7 @@ function Message({ message }: MessageProps) {
               </p>
               <p className="text-sm text-gray-500">
                 <Link to="#" className="hover:underline">
-                  {data.message.date}
+                  {data.message.createdAt}
                 </Link>
               </p>
             </div>

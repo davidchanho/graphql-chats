@@ -13,10 +13,10 @@ export const typeDefs = gql`
     email: String!
     password: String!
     avatar: String
-    date: String!
     channels: [Channel!]
     messages: [Message!]
     bookmarks: [Message!]
+    createdAt: String!
   }
 
   type UserInput {

@@ -1,10 +1,10 @@
 import { InMemoryCache } from "@apollo/client";
 import { offsetLimitPagination } from "@apollo/client/utilities";
-import { LocalForageWrapper, CachePersistor } from "apollo3-cache-persist";
+import { CachePersistor, LocalForageWrapper } from "apollo3-cache-persist";
 import dayjs from "dayjs";
 import localforage from "localforage";
-import { currentChannelVar } from ".";
 import _ from "lodash";
+import { currentChannelVar } from ".";
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -20,13 +20,18 @@ export const cache = new InMemoryCache({
             return currentChannelVar;
           },
         },
+        createdAt: {
+          read(createdAt: string) {
+            return dayjs(createdAt).format("h:MM A");
+          },
+        },
       },
     },
     Message: {
       fields: {
-        date: {
-          read(date: string) {
-            return dayjs(date).format("h:MM A");
+        createdAt: {
+          read(createdAt: string) {
+            return dayjs(createdAt).format("h:MM A");
           },
         },
       },
@@ -36,6 +41,11 @@ export const cache = new InMemoryCache({
         name: {
           read(name, options) {
             return _.capitalize(name);
+          },
+        },
+        createdAt: {
+          read(createdAt: string) {
+            return dayjs(createdAt).format("h:MM A");
           },
         },
       },

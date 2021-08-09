@@ -9,9 +9,9 @@ export const typeDefs = gql`
   type Channel {
     _id: ID!
     name: String!
-    date: String!
     messages: [Message!]
     users: [User!]
+    createdAt: String!
   }
 
   type Mutation {
