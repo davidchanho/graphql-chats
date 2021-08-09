@@ -1,43 +1,36 @@
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { IUser } from "../../shared/types/users/index";
 
-export enum Role {
-  Admin = "ADMIN",
-  Editor = "EDITOR",
-}
+const SALT_ROUNDS = 10;
 
-type JWT = {
-  userId: string;
+export const hashPassword = async (password: string) => {
+  return await bcrypt.hash(password, SALT_ROUNDS);
 };
 
-type LoginInput = {
-  email: string;
-  password: string;
+export const checkPassword = async (
+  password: string,
+  hashedPassword: string
+) => {
+  return await bcrypt.compare(password, hashedPassword);
 };
 
-type Credentials = {
-  token: string;
-};
-
-const jwtSecret = "secret";
-
-export const signToken = (userId: string) => {
-  return jwt.sign({ _id: userId }, jwtSecret, {
+export const generateJWT = (user: IUser) => {
+  return jwt.sign({ _id: user._id }, 'secret', {
     expiresIn: 3600,
   });
 };
 
-export function isTokenValid(token: string): JWT | false {
-  const bearerToken = token && token.split(" ");
+export const validateJWT = (token: string) => {
+  return jwt.verify(token, 'secret');
+};
 
-  if (bearerToken) {
+export const getUser = (token: string) => {
+  if (token) {
     try {
-      const decoded = jwt.verify(bearerToken[1], jwtSecret) as JWT;
-
-      return decoded;
-    } catch (e) {
-      return false;
+      return validateJWT(token);
+    } catch (err) {
+      throw new Error("Session invalid");
     }
   }
-
-  return false;
-}
+};

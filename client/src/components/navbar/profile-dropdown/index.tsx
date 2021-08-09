@@ -1,7 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 import Avatar from "../../../common/avatar";
-import { useAuthContext } from "../../../config/firebase";
+import { useAuthContext } from "../../../client/firebase";
 import { classNames } from "../../../helpers";
 import { SignOut } from "../../auth/sign-out";
 

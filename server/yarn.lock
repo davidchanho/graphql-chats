@@ -1043,6 +1043,11 @@
   resolved "https://registry.yarnpkg.com/@types/faker/-/faker-5.5.7.tgz#52aa3ad6ead3642b7c54e1e87e9e3ff5b10b3873"
   integrity sha512-ejzb61Q5zQTtS0ZIafgQ7ahO5ACzmGhG5PfX2hxWyth3k0/aysb4ZOxKQB8DbzwSPppA5jmFBwqnBxjv5hqI5Q==
 
+"@types/gravatar@^1.8.3":
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/@types/gravatar/-/gravatar-1.8.3.tgz#a7d9175d96e0ac54e3ea2dd02a3ed83785ba1c19"
+  integrity sha512-F4Ij02yEI2+hr7aMCrM8syaU9pN16cSJIxnFf/ccVNQ+HrKzgVz8Kn0ZJhWzCJM+UnELHO/OGKTW0O646vk/HA==
+
 "@types/ioredis@^4.26.6":
   version "4.26.6"
   resolved "https://registry.yarnpkg.com/@types/ioredis/-/ioredis-4.26.6.tgz#7e332d6d24f12d79a1099834ccfa0c169ef667ed"
@@ -1487,6 +1492,11 @@ bluebird@3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
   integrity sha512-MKiLiV+I1AA596t9w1sQJ8jkiSr5+ZKi0WKrYGUn6d1Fx+Ij4tIj+m2WMQSGczs5jZVxV339chE8iwk6F64wjA==
+
+blueimp-md5@^2.16.0:
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/blueimp-md5/-/blueimp-md5-2.18.0.tgz#1152be1335f0c6b3911ed9e36db54f3e6ac52935"
+  integrity sha512-vE52okJvzsVWhcgUHOv+69OG3Mdg151xyn41aVQN/5W5S+S43qZhxECtYLAEHMSFWX6Mv5IZrzj3T5+JqXfj5Q==
 
 body-parser@1.19.0, body-parser@^1.19.0:
   version "1.19.0"
@@ -1967,6 +1977,11 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
+dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+  integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -1988,6 +2003,11 @@ electron-to-chromium@^1.3.793:
   version "1.3.793"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.793.tgz#c10dff5f3126238004de344db458f1da3641d554"
   integrity sha512-l9NrGV6Mr4ov5mayYPvIWcwklNw5ROmy6rllzz9dCACw9nKE5y+s5uQk+CBJMetxrWZ6QJFsvEfG6WDcH2IGUg==
+
+email-validator@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/email-validator/-/email-validator-2.0.4.tgz#b8dfaa5d0dae28f1b03c95881d904d4e40bfe7ed"
+  integrity sha512-gYCwo7kh5S3IDyZPLZf6hSS0MnZT8QmJFqYvbqlDZSbwdZlY6QZWxJ4i/6UhITOJ4XzyI647Bm2MXKCLqnJ4nQ==
 
 emoji-regex@^7.0.1:
   version "7.0.3"
@@ -2431,6 +2451,16 @@ graphql@^15.5.1:
   version "15.5.1"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.5.1.tgz#f2f84415d8985e7b84731e7f3536f8bb9d383aad"
   integrity sha512-FeTRX67T3LoE3LWAxxOlW2K3Bz+rMYAC18rRguK4wgXaTZMiJwSUwDmPFo3UadAKbzirKIg5Qy+sNJXbpPRnQw==
+
+gravatar@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/gravatar/-/gravatar-1.8.1.tgz#743bbdf3185c3433172e00e0e6ff5f6b30c58997"
+  integrity sha512-18frnfVp4kRYkM/eQW32Mfwlsh/KMbwd3S6nkescBZHioobflFEFHsvM71qZAkUSLNifyi2uoI+TuGxJAnQIOA==
+  dependencies:
+    blueimp-md5 "^2.16.0"
+    email-validator "^2.0.4"
+    querystring "0.2.0"
+    yargs "^15.4.1"
 
 has-bigints@^1.0.1:
   version "1.0.1"
@@ -3526,6 +3556,11 @@ qs@6.7.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
+querystring@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
+  integrity sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
+
 queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
@@ -4401,7 +4436,7 @@ yargs-parser@^18.1.2:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs@^15.3.1:
+yargs@^15.3.1, yargs@^15.4.1:
   version "15.4.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.4.1.tgz#0d87a16de01aee9d8bec2bfbf74f67851730f4f8"
   integrity sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==

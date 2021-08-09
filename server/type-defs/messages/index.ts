@@ -2,8 +2,9 @@ import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   extend type Query {
-    messages(offset: Int, limit: Int, channel: ID): [Message]
-    message(_id: ID!): Message
+    messages: [Message!]
+    message(_id: ID!): Message!
+    messageFeed(cursor: String): MessageFeed
   }
 
   type Message {
@@ -12,21 +13,23 @@ export const typeDefs = gql`
     date: String!
     channel: Channel!
     user: User!
+    bookmarkedBy: [User!]
   }
 
-  input MessageInput {
-    text: String
-    user: String
-    channel: String
+  type MessageFeed {
+    messages: [Message]!
+    cursor: String!
+    hasNextPage: Boolean!
   }
 
   type Mutation {
-    addMessage(item: MessageInput): Message
-    removeMessage(_id: ID!): Message
-    updateMessage(_id: ID!, update: String): Message
+    addMessage(text: String!, channel: ID!): Message!
+    removeMessage(_id: ID!): Boolean!
+    updateMessage(_id: ID!, update: String!): Message!
+    toggleBookmark(_id: ID!): Message!
   }
 
   type Subscription {
-    messageCreated: Message
+    messageCreated: Message!
   }
 `;

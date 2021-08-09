@@ -7,7 +7,7 @@ import {
   auth,
   facebookAuthProvider,
   googleAuthProvider,
-} from "../../../config/firebase";
+} from "../../../client/firebase";
 
 export const SignInGoogle = () => {
   const navigate = useNavigate();

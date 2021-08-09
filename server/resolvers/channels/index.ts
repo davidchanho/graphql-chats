@@ -1,18 +1,21 @@
 import controllers from "../../controllers";
-import db from "../../models";
-
-const model = db.Channel;
+const model = "Channel";
 
 const Query = {
-  channels: controllers.fetchMany(model),
-  channel: controllers.fetchOne(model),
-};
-const Channel = {
-  users: async (parent: any, args: any, context: any) => {
-    return db.Message.find({ channel: parent._id });
+  channels: (parent: any, args: any, { models }: any) => {
+    return models.Channel.find({});
   },
-  messages: (parent: any, args: any, context: any) => {
-    return db.Message.find({ channel: parent._id });
+  channel: (parent: any, args: any, { models }: any) => {
+    return models.Channel.findById(args._id);
+  },
+};
+
+const Channel = {
+  users: async (parent: any, args: any, { models }: any) => {
+    return models.Message.find({ channel: parent._id });
+  },
+  messages: (parent: any, args: any, { models }: any) => {
+    return models.Message.find({ channel: parent._id });
   },
 };
 

@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_CHANNELS = gql`
-  query fetchChannels {
+  query FetchChannels {
     channels {
       _id
       name
@@ -13,7 +13,7 @@ export const FETCH_CHANNELS = gql`
 `;
 
 export const FETCH_CHANNEL = gql`
-  query fetchChannel($_id: ID!) {
+  query FetchChannel($_id: ID!) {
     channel(_id: $_id) {
       _id
       name
@@ -35,7 +35,7 @@ export const FETCH_CHANNEL = gql`
 `;
 
 export const ADD_CHANNEL = gql`
-  mutation Mutation($item: ChannelInput) {
+  mutation AddChannel($item: ChannelInput) {
     addChannel(item: $item) {
       _id
     }
@@ -43,7 +43,7 @@ export const ADD_CHANNEL = gql`
 `;
 
 export const REMOVE_CHANNEL = gql`
-  mutation Mutation($_id: ID!) {
+  mutation RemoveChannel($_id: ID!) {
     removeChannel(_id: $_id) {
       _id
     }
@@ -51,7 +51,7 @@ export const REMOVE_CHANNEL = gql`
 `;
 
 export const UPDATE_CHANNEL = gql`
-  mutation Mutation($_id: ID!, $update: String) {
+  mutation UpdateChannel($_id: ID!, $update: String) {
     updateChannel(_id: $_id, update: $update) {
       _id
     }

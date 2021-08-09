@@ -1,28 +1,34 @@
 import React from "react";
+import { users } from "../../data";
 
 interface Props {
+  name?: string;
   size?: string;
   src?: string | null | undefined;
   round?: boolean;
 }
 
 function Avatar({
+  name,
   size = "8",
-  src = "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  src = users[0].avatar,
   round = false,
 }: Props) {
-  
   if (!src) {
     return (
       <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
-        <span className="text-sm font-medium leading-none text-white">TW</span>
+        <span className="text-sm font-medium leading-none text-white">
+          {name}
+        </span>
       </span>
     );
   }
 
   return (
     <img
-      className={`h-${size} w-auto ${round ? "rounded-full" : "rounded"}`}
+      className={`h-${size} w-auto ${
+        round ? "rounded-full" : "rounded"
+      } ring-2 ring-white`}
       src={src}
       alt=""
     />

@@ -1,35 +1,33 @@
 const controllers = {
-  fetchMany(db: any) {
-    return (parent: any, args: any, context: any) => db.find({});
+  fetchMany(model: any) {
+    return (parent: any, args: any, { models }: any) => models[model].find({});
   },
-  fetchOne(db: any) {
-    return (parent: any, args: any, context: any) => db.findById(args._id);
+  fetchOne(model: any) {
+    return (parent: any, { _id }: any, { models }: any) =>
+      models[model].findById(_id);
   },
-  addOne(db: any) {
-    return async (parent: any, args: any, context: any) => {
+  addOne(model: any) {
+    return async (parent: any, { item }: any, { models }: any) => {
       try {
-        const item = new db(args.item);
-        return item.save();
+        const newItem = new models[model](item);
+        return newItem.save();
       } catch (err) {
         console.log(err);
       }
     };
   },
-  removeOne(db: any) {
-    return async (parent: any, args: any, context: any) => {
+  removeOne(model: any) {
+    return async (parent: any, { _id }: any, { models }: any) => {
       try {
-        await db.findOneAndRemove(args._id);
+        await models[model].findOneAndRemove(_id);
       } catch (err) {
         console.log(err);
       }
     };
   },
-  updateOne(db: any) {
-    return async (parent: any, args: any, context: any) => {
-      return await db.findOneAndUpdate(
-        { _id: args._id },
-        JSON.parse(args.update)
-      );
+  updateOne(model: any) {
+    return async (parent: any, { _id, update }: any, { models }: any) => {
+      return await models[model].findOneAndUpdate({ _id }, JSON.parse(update));
     };
   },
 };

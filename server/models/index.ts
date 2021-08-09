@@ -2,10 +2,10 @@ import Channel from "./channels";
 import Message from "./messages";
 import User from "./users";
 
-const db = {
+const models = {
   Channel,
   User,
   Message,
 };
 
-export default db;
+export default models;

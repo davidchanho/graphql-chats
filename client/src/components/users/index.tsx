@@ -2,56 +2,30 @@ import { useQuery } from "@apollo/client";
 import { Disclosure } from "@headlessui/react";
 import React from "react";
 import Avatar from "../../common/avatar";
+import { users } from "../../data";
 import { classNames } from "../../helpers";
 import { FETCH_USERS } from "../../queries";
-
-const members = [
-  {
-    name: "Leonard Krasner",
-    handle: "leonardkrasner",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Floyd Miles",
-    handle: "floydmiles",
-    imageUrl:
-      "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Emily Selman",
-    handle: "emilyselman",
-    imageUrl:
-      "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Kristin Watson",
-    handle: "kristinwatson",
-    imageUrl:
-      "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
 
 const navigation = [
   {
     name: "Members",
     current: false,
-    children: members,
+    children: users,
   },
   {
     name: "Organizations",
     current: false,
-    children: members,
+    children: users,
   },
   {
     name: "Pinned",
     current: false,
-    children: members,
+    children: users,
   },
   {
     name: "Shortcuts",
     current: false,
-    children: members,
+    children: users,
   },
 ];
 
@@ -111,18 +85,18 @@ function List() {
               <Disclosure.Panel className="space-y-1 overflow-y-scroll">
                 {item.children.map((item) => (
                   <li
-                    key={item.handle}
+                    key={item.name}
                     className="flex flex-row space-x-2 py-2 pl-7 items-center "
                   >
                     <div className="flex-shrink-0">
-                      <Avatar round src={item.imageUrl} size="8" />
+                      <Avatar round src={item.avatar} size="8" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 truncate">
                         {item.name}
                       </p>
                       <p className="text-sm text-gray-500 truncate">
-                        {"@" + item.handle}
+                        {"@" + item.name.toLowerCase().replace(" ", "")}
                       </p>
                     </div>
                   </li>
