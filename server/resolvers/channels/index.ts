@@ -12,7 +12,7 @@ const Query = {
 
 const Channel = {
   users: async (parent: any, args: any, { models }: any) => {
-    return models.Message.find({ channel: parent._id });
+    return models.Channel.findById(parent._id).populate('user');
   },
   messages: (parent: any, args: any, { models }: any) => {
     return models.Message.find({ channel: parent._id });
