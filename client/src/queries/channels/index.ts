@@ -1,5 +1,17 @@
 import { gql } from "@apollo/client";
 
+export const FETCH_CHANNEL_HEADER = gql`
+  query FetchChannelHeader($_id: ID!) {
+    channel(_id: $_id) {
+      _id
+      name
+      users {
+        _id
+      }
+    }
+  }
+`;
+
 export const ADD_CHANNEL = gql`
   mutation AddChannel($item: ChannelInput) {
     addChannel(item: $item) {

@@ -3,18 +3,7 @@ import client from "../client";
 import models from "../models";
 import { closeDB, createChannel, createMessage, createUser } from "./helpers";
 
-_.times(5, async function seed() {
-  client();
-
-  const newChannel = createChannel();
-  const channel = await new models.Channel(newChannel);
-
-  const newUser = createUser();
-  const user = await new models.User(newUser);
-
-  channel.users.push(user);
-  user.channels.push(channel);
-
+async function createMessages(channel: any, user: any) {
   const newMessage = createMessage();
   const message = await new models.Message(newMessage);
 
@@ -25,5 +14,22 @@ _.times(5, async function seed() {
   message.channel = channel;
   message.user = user;
 
-  closeDB([channel.save(), user.save(), message.save()]);
+  Promise.all([message.save()]);
+}
+
+_.times(5, async function seed() {
+  (await client()).connection.db.dropDatabase();
+
+  const newChannel = createChannel();
+  const channel = await new models.Channel(newChannel);
+
+  const newUser = createUser();
+  const user = await new models.User(newUser);
+
+  channel.users.push(user);
+  user.channels.push(channel);
+
+  _.times(10, () => createMessages(channel, user));
+
+  closeDB([channel.save(), user.save()]);
 });

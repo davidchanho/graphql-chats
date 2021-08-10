@@ -1,25 +1,14 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { UserIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useParams } from "react-router-dom";
 import AvatarGroup from "../../../common/avatar-group";
-
-const FETCH_CHANNEL = gql`
-  query FetchChannel($_id: ID!) {
-    channel(_id: $_id) {
-      _id
-      name
-      users {
-        _id
-      }
-    }
-  }
-`;
+import { FETCH_CHANNEL_HEADER } from "../../../queries";
 
 function ChannelHeader() {
   const params = useParams();
 
-  const { loading, error, data } = useQuery(FETCH_CHANNEL, {
+  const { loading, error, data } = useQuery(FETCH_CHANNEL_HEADER, {
     variables: {
       _id: params._id,
     },
