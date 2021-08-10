@@ -1,23 +1,10 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React from "react";
 import { Link } from "react-router-dom";
 import Avatar from "../../../common/avatar";
+import { FETCH_MESSAGE } from "../../../queries";
 import { MessageProps } from "../../../types";
 import MessageMenu from "./MessageMenu";
-
-const FETCH_MESSAGE = gql`
-  query FetchMessage($_id: ID!) {
-    message(_id: $_id) {
-      _id
-      text
-      createdAt
-      user {
-        _id
-        name
-      }
-    }
-  }
-`;
 
 function Message({ message }: MessageProps) {
   const { loading, error, data } = useQuery(FETCH_MESSAGE, {
@@ -35,7 +22,7 @@ function Message({ message }: MessageProps) {
         <Avatar size="10" user={data.message.user} />
         <div className="w-full">
           <div className="flex items-center">
-            <div className="flex flex-row gap-1 items-center w-full">
+            <div className="flex flex-row gap-1 items-end w-full">
               <p className="text-md font-bold text-gray-900">
                 <Link
                   to={`/users/${data.message.user._id}`}
@@ -54,7 +41,7 @@ function Message({ message }: MessageProps) {
               <MessageMenu />
             </div>
           </div>
-          <div>{data.message.text}</div>
+          <div className="pr-5">{data.message.text}</div>
         </div>
       </div>
     </div>

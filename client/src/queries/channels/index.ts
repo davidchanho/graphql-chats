@@ -12,6 +12,17 @@ export const FETCH_CHANNEL_HEADER = gql`
   }
 `;
 
+export const FETCH_CHANNEL = gql`
+  query FetchChannel($_id: ID!) {
+    channel(_id: $_id) {
+      _id
+      messages {
+        _id
+      }
+    }
+  }
+`;
+
 export const ADD_CHANNEL = gql`
   mutation AddChannel($item: ChannelInput) {
     addChannel(item: $item) {

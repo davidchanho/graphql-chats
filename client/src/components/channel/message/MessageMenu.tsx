@@ -1,30 +1,8 @@
 import { Menu, Transition } from "@headlessui/react";
-import {
-  CodeIcon,
-  DotsVerticalIcon,
-  FlagIcon,
-  StarIcon,
-} from "@heroicons/react/outline";
+import { DotsVerticalIcon } from "@heroicons/react/outline";
 import React, { Fragment } from "react";
+import { menu } from "./MessageMenu.data";
 import MessageMenuItem from "./MessageMenuItem";
-
-const menu = [
-  {
-    id: "favorites",
-    label: "Add to favorites",
-    icon: StarIcon,
-  },
-  {
-    id: "embed",
-    label: "Embed",
-    icon: CodeIcon,
-  },
-  {
-    id: "report",
-    label: "Report content",
-    icon: FlagIcon,
-  },
-];
 
 function MessageMenu() {
   return (

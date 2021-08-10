@@ -1,21 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React from "react";
-import { IUser } from "../../../../shared/types";
-
-interface Props {
-  user: IUser;
-  size?: string;
-  round?: boolean;
-}
-
-const FETCH_USER_AVATAR = gql`
-  query FetchUser($_id: ID!) {
-    user(_id: $_id) {
-      _id
-      avatar
-    }
-  }
-`;
+import { FETCH_USER_AVATAR } from "../../queries";
+import { Props } from "./Avatar.types";
 
 function Avatar({ user, size = "8", round = false }: Props) {
   const { loading, error, data } = useQuery(FETCH_USER_AVATAR, {

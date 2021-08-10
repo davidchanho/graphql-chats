@@ -20,7 +20,7 @@ export function createChannel() {
 
 export function createMessage() {
   return {
-    text: faker.lorem.words(),
+    text: faker.lorem.paragraph(5),
   };
 }
 

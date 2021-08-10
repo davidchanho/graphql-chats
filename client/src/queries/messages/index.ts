@@ -1,5 +1,19 @@
 import { gql } from "@apollo/client";
 
+export const FETCH_MESSAGE = gql`
+  query FetchMessage($_id: ID!) {
+    message(_id: $_id) {
+      _id
+      text
+      createdAt
+      user {
+        _id
+        name
+      }
+    }
+  }
+`;
+
 export const ADD_MESSAGE = gql`
   mutation AddMessage($text: String!, $user: ID!, $channel: ID!) {
     addMessage(item: $item) {

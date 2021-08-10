@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema(
     messages: [{ type: Schema.Types.ObjectId, ref: "message" }],
     bookmarks: [{ type: Schema.Types.ObjectId, ref: "message" }],
     channels: [{ type: Schema.Types.ObjectId, ref: "channel" }],
-    date: { type: String, default: new Date().toString() },
   },
   {
     timestamps: true,

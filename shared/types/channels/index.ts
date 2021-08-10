@@ -5,5 +5,5 @@ export interface IChannel {
   name: string;
   messages?: IMessage[];
   users?: IUser[];
-  createdAt: string;
+  createdAt?: string;
 }

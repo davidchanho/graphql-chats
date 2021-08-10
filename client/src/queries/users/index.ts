@@ -18,6 +18,15 @@ export const FETCH_USER_PORTFOLIO = gql`
   }
 `;
 
+export const FETCH_USER_AVATAR = gql`
+  query FetchUser($_id: ID!) {
+    user(_id: $_id) {
+      _id
+      avatar
+    }
+  }
+`;
+
 export const LOGIN_USER = gql`
   mutation LoginUser($email: String, $password: String) {
     loginUser(email: $email, password: $password) {

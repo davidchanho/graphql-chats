@@ -9,7 +9,6 @@ const messageSchema = new mongoose.Schema(
       ref: "channel",
       required: true,
     },
-    date: { type: String, default: new Date().toString() },
     bookmarkedBy: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -1,24 +1,14 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { IMessage } from "../../../../../shared/types";
+import { FETCH_CHANNEL } from "../../../queries";
 import Message from "../message";
-
-const FETCH_CHANNEL_MESSAGES = gql`
-  query FetchChannelMessages($_id: ID!) {
-    channel(_id: $_id) {
-      _id
-      messages {
-        _id
-      }
-    }
-  }
-`;
 
 function Messages() {
   const params = useParams();
 
-  const { loading, error, data } = useQuery(FETCH_CHANNEL_MESSAGES, {
+  const { loading, error, data } = useQuery(FETCH_CHANNEL, {
     variables: {
       _id: params._id,
     },

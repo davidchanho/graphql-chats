@@ -1,9 +1,5 @@
 import React from "react";
-
-interface Props {
-  label: string;
-  color: string;
-}
+import { Props } from "./Badge.types";
 
 function Badge({ label, color }: Props) {
   if (label === "0") return null;

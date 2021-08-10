@@ -1,13 +1,7 @@
 import { Menu } from "@headlessui/react";
 import React from "react";
 import { classNames } from "../../../helpers";
-
-interface Props {
-  item: {
-    label: string;
-    icon: (props: React.ComponentProps<"svg">) => JSX.Element;
-  };
-}
+import { Props } from "./MessageMenuItem.types";
 
 function MessageMenuItem({ item }: Props) {
   return (
