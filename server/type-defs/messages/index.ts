@@ -1,6 +1,8 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+  scalar DateTime
+
   extend type Query {
     messages: [Message!]
     message(_id: ID!): Message!
@@ -13,7 +15,8 @@ export const typeDefs = gql`
     channel: Channel!
     user: User!
     bookmarkedBy: [User]
-    createdAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type MessageFeed {

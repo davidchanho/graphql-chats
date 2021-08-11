@@ -10,5 +10,6 @@ export interface IUser {
   messages: IMessage[];
   bookmarks: IMessage[];
   channels: IChannel[];
-  createdAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

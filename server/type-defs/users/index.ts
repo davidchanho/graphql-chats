@@ -1,6 +1,8 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+  scalar DateTime
+
   extend type Query {
     users: [User!]!
     user(_id: ID!): User!
@@ -16,7 +18,8 @@ export const typeDefs = gql`
     channels: [Channel!]
     messages: [Message!]
     bookmarks: [Message!]
-    createdAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type UserInput {

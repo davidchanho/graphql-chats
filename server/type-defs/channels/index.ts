@@ -1,6 +1,8 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+  scalar DateTime
+
   extend type Query {
     channels: [Channel!]
     channel(_id: ID!): Channel!
@@ -11,7 +13,8 @@ export const typeDefs = gql`
     name: String!
     messages: [Message!]
     users: [User!]
-    createdAt: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type Mutation {
