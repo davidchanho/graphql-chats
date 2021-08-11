@@ -1,12 +1,9 @@
 import { MenuAlt2Icon } from "@heroicons/react/outline";
 import React from "react";
 import NavSearch from "./nav-search";
+import { Props } from "./Navbar.types";
 import NotificationMenu from "./notification-menu";
 import ProfileDropdown from "./profile-dropdown";
-
-interface Props {
-  openSidebar: () => void;
-}
 
 function Navbar({ openSidebar }: Props) {
   return (

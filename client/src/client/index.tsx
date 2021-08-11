@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import authLink from "./auth";
 import { cache, newPersistor } from "./cache";
 
-export const currentChannelVar = makeVar("6109d3b97a879c92b7014ea2");
-export const userVar = makeVar("6109d3a47a879c92b7014ea0");
+export const currentChannelVar = makeVar("");
+export const userVar = makeVar("");
 
 const httpLink = new HttpLink({
   uri: "http://localhost:4000/graphql",

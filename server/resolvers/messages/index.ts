@@ -1,5 +1,8 @@
 import { AuthenticationError, ForbiddenError } from "apollo-server-express";
 import mongoose from "mongoose";
+import controllers from "../../controllers";
+
+const model = "Message";
 
 // const pubsub = new PubSub();
 
@@ -7,9 +10,7 @@ const Query = {
   messages: (parent: any, args: any, { models }: any) => {
     return models.Message.find({});
   },
-  message: (parent: any, args: any, { models }: any) => {
-    return models.Message.findById(args._id);
-  },
+  message: controllers.fetchOne(model),
   messageFeed: async (parent: any, args: any, { models }: any) => {
     const limit = 10;
     let hasNextPage = false;

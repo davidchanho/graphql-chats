@@ -1,7 +1,6 @@
 import { ApolloProvider } from "@apollo/client";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 import useClient from "./client";
 import { AuthProvider } from "./client/firebase";
 import SidebarLayout from "./layouts/sidebar-layout";

@@ -2,12 +2,14 @@ import { useMutation, useReactiveVar } from "@apollo/client";
 import { PaperAirplaneIcon } from "@heroicons/react/solid";
 import React, { useState } from "react";
 import { currentChannelVar, userVar } from "../../../client";
+import { useScrollToBottom } from "../../../hooks";
 import { ADD_MESSAGE } from "../../../queries";
 
 function MessageForm() {
   const currentChannel = useReactiveVar(currentChannelVar);
   const user = useReactiveVar(userVar);
   const [text, setText] = useState("");
+  const { handleScrollToBottom } = useScrollToBottom();
 
   const [addMessage, { client }] = useMutation(ADD_MESSAGE, {
     variables: {
@@ -23,6 +25,7 @@ function MessageForm() {
     e.preventDefault();
     addMessage();
     setText("");
+    handleScrollToBottom();
     client.resetStore();
   };
 

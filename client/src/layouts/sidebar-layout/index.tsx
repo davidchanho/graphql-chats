@@ -9,14 +9,20 @@ function SidebarLayout() {
   const openSidebar = () => setSidebarOpen(true);
 
   return (
-    <div className="h-screen overflow-hidden">
+    <>
       <Navbar openSidebar={openSidebar} />
-      <div className="w-full flex flex-row h-full md:px-8 xl:px-0">
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <Outlet />
-        <Users />
+      <div className="h-full grid grid-cols-1 md:grid-cols-6">
+        <div className="col-span-1">
+          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        </div>
+        <div className="h-full col-span-4">
+          <Outlet />
+        </div>
+        <div className="col-span-1">
+          <Users />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

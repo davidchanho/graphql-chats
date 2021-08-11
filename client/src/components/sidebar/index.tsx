@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import React, { Fragment } from "react";
@@ -6,76 +6,8 @@ import { Link } from "react-router-dom";
 import { IChannel } from "../../../../shared/types";
 import Badge from "../../common/badge";
 import { classNames } from "../../helpers";
-
-const FETCH_CHANNELS = gql`
-  query FetchChannels {
-    channels {
-      _id
-      name
-      messages {
-        _id
-      }
-    }
-  }
-`;
-
-interface Props {
-  sidebarOpen: boolean;
-  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface ListProps {
-  channels: [{ name: string; children: IChannel[]; current: boolean }];
-}
-
-function List({ channels }: ListProps) {
-  return (
-    <ul className="divide-y divide-gray-200">
-      {channels.map((item) => (
-        <Disclosure as="div" key={item.name} className="space-y-1">
-          {({ open }) => (
-            <>
-              <Disclosure.Button
-                className={classNames(
-                  item.current
-                    ? "bg-gray-100 text-gray-900"
-                    : "bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                  "group w-full flex items-center justify-between px-2 py-2 text-left text-sm font-medium focus:bg-gray-100 focus:outline-none focus:ring-0 border-b border-t"
-                )}
-              >
-                <div className="flex flex-row items-center">
-                  <svg
-                    className={classNames(
-                      open ? "text-gray-400 rotate-90" : "text-gray-300",
-                      "mr-1 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
-                    )}
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 6L14 10L6 14V6Z" fill="currentColor" />
-                  </svg>
-                  <span className="font-bold text-lg">{item.name}</span>
-                </div>
-              </Disclosure.Button>
-              <Disclosure.Panel className="space-y-1 overflow-y-scroll">
-                {item.children.map((item) => (
-                  <Link key={item._id} to={`/channels/${item._id}`}>
-                    <li className="flex flex-row space-x-2 py-2 px-3 items-center justify-between hover:bg-gray-100 cursor-pointer">
-                      <p className="text-sm font-medium text-gray-900 truncate">
-                        #{item.name}
-                      </p>
-                      <Badge label={`${item.messages?.length}`} color="gray" />
-                    </li>
-                  </Link>
-                ))}
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
-      ))}
-    </ul>
-  );
-}
+import { FETCH_CHANNELS } from "../../queries";
+import { ListProps, Props } from "./Sidebar.types";
 
 function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
   const { loading, error, data } = useQuery(FETCH_CHANNELS);
@@ -170,20 +102,65 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
         </Dialog>
       </Transition.Root>
 
-      <div className="hidden md:flex md:flex-shrink-0">
-        <div className="w-64 flex flex-col">
-          <div className="border-r border-gray-200 pb-4 flex flex-col flex-grow overflow-y-auto">
-            <div className="flex-grow flex flex-col">
-              <List
-                channels={[
-                  { name: "Channels", children: data.channels, current: true },
-                ]}
-              />
-            </div>
-          </div>
+      <div className="hidden md:flex md:flex-shrink-0 border-r">
+        <div className="border-gray-200 pb-4 flex flex-col flex-grow overflow-y-auto">
+          <List
+            channels={[
+              { name: "Channels", children: data.channels, current: true },
+            ]}
+          />
         </div>
       </div>
     </>
+  );
+}
+
+function List({ channels }: ListProps) {
+  return (
+    <ul className="divide-y divide-gray-200">
+      {channels.map((item) => (
+        <Disclosure as="div" key={item.name} className="space-y-1">
+          {({ open }) => (
+            <>
+              <Disclosure.Button
+                className={classNames(
+                  item.current
+                    ? "bg-gray-100 text-gray-900"
+                    : "bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                  "group w-full flex items-center justify-between px-2 py-2 text-left text-sm font-medium focus:bg-gray-100 focus:outline-none focus:ring-0 border-b border-t"
+                )}
+              >
+                <div className="flex flex-row items-center">
+                  <svg
+                    className={classNames(
+                      open ? "text-gray-400 rotate-90" : "text-gray-300",
+                      "mr-1 flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150"
+                    )}
+                    viewBox="0 0 20 20"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 6L14 10L6 14V6Z" fill="currentColor" />
+                  </svg>
+                  <span className="font-bold text-lg">{item.name}</span>
+                </div>
+              </Disclosure.Button>
+              <Disclosure.Panel className="space-y-1 overflow-y-scroll">
+                {item.children.map((item) => (
+                  <Link key={item._id} to={`/channels/${item._id}`}>
+                    <li className="flex flex-row space-x-2 py-2 px-3 items-center justify-between hover:bg-gray-100 cursor-pointer">
+                      <p className="text-sm font-medium text-gray-900 truncate">
+                        #{item.name}
+                      </p>
+                      <Badge label={`${item.messages?.length}`} color="gray" />
+                    </li>
+                  </Link>
+                ))}
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+      ))}
+    </ul>
   );
 }
 

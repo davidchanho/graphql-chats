@@ -1,32 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { Disclosure } from "@headlessui/react";
 import React from "react";
-import { users } from "../../data";
 import { classNames } from "../../helpers";
 import { FETCH_USERS } from "../../queries";
-
-const navigation = [
-  {
-    name: "Members",
-    current: false,
-    children: users,
-  },
-  {
-    name: "Organizations",
-    current: false,
-    children: users,
-  },
-  {
-    name: "Pinned",
-    current: false,
-    children: users,
-  },
-  {
-    name: "Shortcuts",
-    current: false,
-    children: users,
-  },
-];
+import { navigation } from "./Users.data";
 
 function Users() {
   const { loading, error, data } = useQuery(FETCH_USERS);
@@ -35,15 +12,11 @@ function Users() {
   if (error) return null;
 
   return (
-    <div className="hidden md:flex md:flex-shrink-0">
-      <div className="w-72 flex flex-col">
-        <div className="border-l border-gray-200 pb-4 flex flex-col flex-grow overflow-y-auto">
-          <div className="flex-grow flex flex-col">
-            <nav className="flex-1 space-y-1 overflow-y-scroll">
-              <List />
-            </nav>
-          </div>
-        </div>
+    <div className="hidden md:flex md:flex-shrink-0 border-l border-gray-200 h-full">
+      <div className="flex-grow flex flex-col">
+        <nav className="flex-1 space-y-1 overflow-y-scroll">
+          <List />
+        </nav>
       </div>
     </div>
   );

@@ -79,8 +79,8 @@ const Mutation = {
       throw new Error("Error creating account");
     }
   },
-  removeUser: controllers.removeOne(model),
-  updateUser: controllers.updateOne(model),
+  removeUser: controllers.remove(model),
+  updateUser: controllers.update(model),
 };
 
 export const resolvers = {
