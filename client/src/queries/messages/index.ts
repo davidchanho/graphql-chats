@@ -1,5 +1,17 @@
 import { gql } from "@apollo/client";
 
+export const MESSAGE_FEED = gql`
+  query messageFeed($cursor: String) {
+    messageFeed(cursor: $cursor) {
+      cursor
+      hasNextPage
+      messages {
+        _id
+      }
+    }
+  }
+`;
+
 export const FETCH_MESSAGE = gql`
   query FetchMessage($_id: ID!) {
     message(_id: $_id) {
@@ -16,7 +28,7 @@ export const FETCH_MESSAGE = gql`
 
 export const ADD_MESSAGE = gql`
   mutation AddMessage($text: String!, $user: ID!, $channel: ID!) {
-    addMessage(item: $item) {
+    addMessage(text: $text, user: $user, channel: $channel) {
       _id
     }
   }

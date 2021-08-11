@@ -72,7 +72,7 @@ const Mutation = {
         avatar,
         password: hashed,
       });
-
+      
       return generateJWT(user);
     } catch (err) {
       console.log(err);

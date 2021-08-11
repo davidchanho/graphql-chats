@@ -17,7 +17,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: Props) {
 
   return (
     <>
-      <Transition.Root  show={sidebarOpen} as={Fragment}>
+      <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
           static
@@ -119,7 +119,12 @@ function List({ channels }: ListProps) {
   return (
     <ul className="divide-y divide-gray-200">
       {channels.map((item) => (
-        <Disclosure defaultOpen={true} as="div" key={item.name} className="space-y-1">
+        <Disclosure
+          defaultOpen={true}
+          as="div"
+          key={item.name}
+          className="space-y-1"
+        >
           {({ open }) => (
             <>
               <Disclosure.Button

@@ -44,6 +44,7 @@ function useClient() {
         new ApolloClient({
           link: authLink.concat(httpLink),
           cache,
+          connectToDevTools: true,
         })
       );
     }

@@ -20,6 +20,7 @@ export const typeDefs = gql`
     bookmarks: [Message!]
     createdAt: DateTime!
     updatedAt: DateTime!
+    token: String
   }
 
   type UserInput {
@@ -29,7 +30,7 @@ export const typeDefs = gql`
 
   type Mutation {
     loginUser(email: String!, password: String!): User!
-    registerUser(email: String!, password: String!): User!
+    registerUser(name: String!, email: String!, password: String!): User!
     removeUser(_id: ID!): User!
     updateUser(_id: ID!, item: String!): User!
   }

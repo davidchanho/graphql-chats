@@ -2,7 +2,6 @@ import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import expressJwt from "express-jwt";
 import { makeExecutableSchema } from "graphql-tools";
-import { JwtPayload } from "jsonwebtoken";
 import { getUser } from "./auth/";
 import client from "./client";
 import { cache } from "./client/cache";
@@ -10,7 +9,7 @@ import models from "./models";
 import resolvers from "./resolvers";
 import typeDefs from "./type-defs";
 
-require("dotenv").config();
+require("dotenv").config({ path: "/.env" });
 
 const schema = makeExecutableSchema({
   typeDefs,

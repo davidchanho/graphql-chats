@@ -17,7 +17,7 @@ const Query = {
     let cursorQuery = {};
 
     if (args.cursor) {
-      cursorQuery = { _id: { $lt: args.cursor } };
+      cursorQuery = { _id: { $lt: args.cursor }, channel: args.channel };
     }
 
     let messages = await models.Message.find(cursorQuery)

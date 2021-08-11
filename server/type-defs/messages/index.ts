@@ -29,7 +29,7 @@ export const typeDefs = gql`
     addMessage(text: String!, channel: ID!): Message!
     removeMessage(_id: ID!): Boolean!
     updateMessage(_id: ID!, update: String!): Message!
-    toggleBookmark(_id: ID!): Message!
+    bookmarkMessage(_id: ID!): Message!
   }
 
   type Subscription {
